@@ -6,13 +6,14 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+import H3 from '../../components/H3';
+import H4 from '../../components/H4';
 
 export default function HomePage() {
   return (
-    <h1>
-      <FormattedMessage {...messages.header} />
-    </h1>
+    <div>
+      <H3 primary>Search for patients</H3>
+      <H4 grey>Enter the doctor id</H4>
+    </div>
   );
 }

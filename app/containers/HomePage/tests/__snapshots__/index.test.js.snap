@@ -1,9 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<HomePage /> should render and match the snapshot 1`] = `
-<h1>
-  <span>
-    This is the HomePage container!
-  </span>
-</h1>
+<div>
+  <h3
+    class="StyledH3-sc-1encqrp-0 ksLKcz"
+  >
+    Search for patients
+  </h3>
+  <h4
+    class="StyledH4-sc-16apqbm-0 hzqXtB"
+  >
+    Enter the doctor id
+  </h4>
+</div>
 `;
