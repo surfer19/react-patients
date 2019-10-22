@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 
-const selectPatientsRecords = state => state.home.patientsRecords;
+const selectPatientsRecords = state => state.homePage.patientsRecords;
+
 const selectId = (state, id) => id;
 // returns id or null
 const selectPractitionerId = createSelector(

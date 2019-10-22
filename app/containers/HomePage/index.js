@@ -5,34 +5,32 @@
  *
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { createStructuredSelector } from 'reselect';
-import { selectPractitionerId } from './selectors';
+import useInjectReducer from 'utils/injectReducer';
+import { useInjectSaga } from 'utils/injectSaga';
+import { createStructuredSelector, selectPractitionerId } from 'reselect';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { compose } from 'redux';
+import reducer from './reducer';
+import { selectPatientsRecords } from './selectors';
+import saga from './saga';
 import H3 from '../../components/H3';
 import H4 from '../../components/H4';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Alert from '../../components/Alert';
+import { loadRecords, getPractitioner } from './actions';
+const key = 'homePage';
 
-export default function HomePage(props) {
+function HomePage(props) {
+  useInjectSaga({ key, saga });
   const [inputId, setInputId] = useState(''); // '' is the initial state value
   const [showErrorMessage, setshowErrorMessage] = useState(false);
 
-  function clickHandler(e) {
-    e.preventDefault();
-    // is inputId valid?
-    if (!isPractitionerIdValid(inputId)) {
-      return setshowErrorMessage(true);
-    }
-    // redirect to list
-    props.history.push(`/patients`);
-    return setshowErrorMessage(false);
-  }
-
-  function isPractitionerIdValid(id) {
-    return selectPractitionerId(mockedState, id) ? true : false;
-  }
+  useEffect(() => {
+    props.loadRecords();
+  }, []);
 
   return (
     <div className="row align-items-center h-100">
@@ -47,11 +45,11 @@ export default function HomePage(props) {
           />
           {/* error message */}
           <Alert
-            show={showErrorMessage}
+            show={!props.practitionerId}
             colorType="danger"
             text="Incorrect doctor ID"
           />
-          <Button colorType="primary" onClick={clickHandler} right>
+          <Button colorType="primary" onClick={props.onClick(inputId)} right>
             Find
           </Button>
         </div>
@@ -61,26 +59,34 @@ export default function HomePage(props) {
 }
 HomePage.propTypes = {
   history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
+    push: PropTypes.func,
+  }),
+};
+const mapStateToProps = (state) => {
+  console.log('state=', state)
+  return {
+    practitionerId: state.homePage.practitionerId,
+  }
 };
 
-const homeState = {
-  patientsRecords: [
-    {
-      patientId: '5cc17bd0a75e3173228f1684',
-      practitionerId: '2588ac7f57fd9b49',
-    },
-    {
-      patientId: '5cc17bd0a75e3173228f1684',
-      practitionerId: '2588ac7f57fd9b49',
-    },
-    {
-      patientId: '5cc17bd0a75e3173228f123',
-      practitionerId: '2588ac7f57fd9b12',
-    },
-  ],
-};
-const mockedState = {
-  home: homeState,
-};
+const mapDispatchToProps = dispatch => ({
+  loadRecords: () => dispatch(loadRecords()),
+  onClick: (id, setshowErrorMessage) => e => {
+    // selectPractitionerId(state, id)
+    e.preventDefault();
+    dispatch(getPractitioner(id));
+  },
+});
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+const withReducer = useInjectReducer({ key, reducer });
+
+export default compose(
+  // Put `withReducer` before `withConnect`
+  withReducer,
+  withConnect,
+)(HomePage);
