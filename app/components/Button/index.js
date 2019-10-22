@@ -9,10 +9,11 @@ import PropTypes from 'prop-types';
 // colorType options: primary, secondary, success, danger, warning, info, light, dark, link
 function Button(props) {
   const right = props.right ? 'float-right' : '';
+  const type = props.colorType ? props.colorType : 'primary';
   return (
     <button
       onClick={props.onClick}
-      className={`btn btn-${props.colorType} ${right}`}
+      className={`btn btn-${type} ${right}`}
       type="button"
     >
       {Children.toArray(props.children)}

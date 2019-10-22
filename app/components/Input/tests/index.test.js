@@ -8,9 +8,12 @@
 
 import React from 'react';
 import { render } from 'react-testing-library';
-// import 'jest-dom/extend-expect'; // add some helpful assertions
-
 import Input from '../index';
+// import 'jest-dom/extend-expect'; // add some helpful assertions
+const someLabel = 'someLabel';
+const somePlaceholder = 'somePlaceholder';
+const renderComponent = (props = {}) =>
+  render(<Input label={someLabel} placeholder={somePlaceholder} {...props} />);
 
 describe('<Input />', () => {
   it('Expect to not log errors in console', () => {
@@ -19,16 +22,36 @@ describe('<Input />', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('Expect to have additional unit tests specified', () => {
-    expect(true).toEqual(false);
+  it('should exist', () => {
+    const { container } = renderComponent();
+    expect(container.querySelector('input')).not.toBeNull();
   });
 
-  /**
-   * Unskip this test to use it
-   *
-   * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
-   */
-  it.skip('Should render and match the snapshot', () => {
+  it('should have a class attribute', () => {
+    const { container } = renderComponent();
+    expect(container.querySelector('input').hasAttribute('class')).toBe(true);
+  });
+
+  it('should have a aria-describedby attribute', () => {
+    const { container } = renderComponent();
+    expect(
+      container.querySelector('input').hasAttribute('aria-describedby'),
+    ).toBe(true);
+  });
+
+  it('should have a placeholder attribute', () => {
+    const { container } = renderComponent();
+    expect(container.querySelector('input').hasAttribute('placeholder')).toBe(
+      true,
+    );
+  });
+
+  it('should have a label tag', () => {
+    const { container } = renderComponent();
+    expect(container.querySelector('label')).not.toBe(null);
+  });
+
+  it('Should render and match the snapshot', () => {
     const {
       container: { firstChild },
     } = render(<Input />);

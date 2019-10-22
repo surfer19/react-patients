@@ -8,30 +8,33 @@
 
 import React from 'react';
 import { render } from 'react-testing-library';
-// import 'jest-dom/extend-expect'; // add some helpful assertions
-
 import Button from '../index';
+const buttonText = 'buttonText';
+
+const renderComponent = () => render(<Button>{buttonText}</Button>);
 
 describe('<Button />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<Button />);
+    render(<Button>{buttonText}</Button>);
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('Expect to have additional unit tests specified', () => {
-    expect(true).toEqual(false);
+  it('should exist', () => {
+    const { container } = renderComponent();
+    expect(container.querySelector('button')).not.toBeNull();
   });
 
-  /**
-   * Unskip this test to use it
-   *
-   * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
-   */
-  it.skip('Should render and match the snapshot', () => {
-    const {
-      container: { firstChild },
-    } = render(<Button />);
-    expect(firstChild).toMatchSnapshot();
+  it('should have a class attribute with default value', () => {
+    const { container } = renderComponent();
+    expect(container.querySelector('button').hasAttribute('class')).toBe(true);
+    expect(container.querySelector('button').getAttribute('class')).toBe(
+      'btn btn-primary ',
+    );
+  });
+
+  it('Should render and match the snapshot', () => {
+
+    expect(renderComponent).toMatchSnapshot();
   });
 });

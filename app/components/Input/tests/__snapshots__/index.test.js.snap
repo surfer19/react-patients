@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input /> Should render and match the snapshot 1`] = `
+<div
+  class="form-group mt-4"
+>
+  <label
+    for="input"
+  />
+  <input
+    aria-describedby="help"
+    class="form-control"
+    id="input"
+  />
+</div>
+`;
