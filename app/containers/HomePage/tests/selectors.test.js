@@ -17,7 +17,7 @@ describe('Home Selectors', () => {
     ],
   };
   const mockedState = {
-    home: homeState,
+    homePage: homeState,
   };
 
   describe('selectPatientsRecords', () => {
