@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const H4Styles = css`
-  font-size: 1.4em;
+  font-size: 1.2em;
   color: ${props => (props.grey ? '#908c8c' : '000')};
   font-weight: 400;
 `;
