@@ -9,11 +9,9 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useInjectReducer from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
-import { createStructuredSelector, selectPractitionerId } from 'reselect';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { compose } from 'redux';
 import reducer from './reducer';
-import { selectPatientsRecords } from './selectors';
 import saga from './saga';
 import H3 from '../../components/H3';
 import H4 from '../../components/H4';
@@ -26,7 +24,6 @@ const key = 'homePage';
 function HomePage(props) {
   useInjectSaga({ key, saga });
   const [inputId, setInputId] = useState(''); // '' is the initial state value
-  const [showErrorMessage, setshowErrorMessage] = useState(false);
 
   useEffect(() => {
     props.loadRecords();
@@ -61,17 +58,18 @@ HomePage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }),
+  loadRecords: PropTypes.func,
+  onClick: PropTypes.func,
+  practitionerId: PropTypes.string,
 };
-const mapStateToProps = (state) => {
-  console.log('state=', state)
-  return {
-    practitionerId: state.homePage.practitionerId,
-  }
-};
+
+const mapStateToProps = state => ({
+  practitionerId: state.homePage.practitionerId,
+});
 
 const mapDispatchToProps = dispatch => ({
   loadRecords: () => dispatch(loadRecords()),
-  onClick: (id, setshowErrorMessage) => e => {
+  onClick: id => e => {
     // selectPractitionerId(state, id)
     e.preventDefault();
     dispatch(getPractitioner(id));
