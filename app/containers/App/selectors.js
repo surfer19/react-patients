@@ -25,8 +25,17 @@ const makeSelectPatientsRecordsByPractitioner = () =>
       statik.filter(record => record.practitionerId === practId),
   );
 
+const makeSelectPatientByPatientId = () =>
+  createSelector(
+    state => state.global.patientsRecords,
+    state => state.global.patientId,
+    (records, patientId) =>
+      records.filter(record => record.patientId === patientId),
+  );
+
 export {
   makeSelectPatientsRecords,
   makeSelectPractitionerId,
   makeSelectPatientsRecordsByPractitioner,
+  makeSelectPatientByPatientId,
 };

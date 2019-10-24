@@ -17,6 +17,7 @@ function Table({
   buttonColumnText: btnText,
   buttonColumnHrefId: btnHref,
   path,
+  onColBtnClick,
 }) {
   function generateTableRows() {
     return rowData.map(row => {
@@ -25,7 +26,7 @@ function Table({
       // add last column with button
       if (btnText) {
         columnElements.push(
-          generateLastButtonColumn(row, path, btnHref, btnText),
+          generateLastButtonColumn(row, path, btnHref, btnText, onColBtnClick),
         );
       }
       return <tr key={shortid.generate()}>{columnElements}</tr>;
@@ -71,9 +72,13 @@ const generateLastButtonColumn = (
   path,
   buttonColumnHrefId,
   buttonColumnText,
+  onColBtnClick,
 ) => (
   <td key={shortid.generate()}>
-    <Button href={`${path}/${row[buttonColumnHrefId]}`}>
+    <Button
+      onClick={e => onColBtnClick(row[buttonColumnHrefId], e)}
+      href={`${path}/${row[buttonColumnHrefId]}`}
+    >
       {buttonColumnText}
     </Button>
   </td>
@@ -86,6 +91,7 @@ Table.propTypes = {
   buttonColumnText: PropTypes.string,
   buttonColumnHrefId: PropTypes.string,
   path: PropTypes.string,
+  onColBtnClick: PropTypes.func,
 };
 
 export default Table;

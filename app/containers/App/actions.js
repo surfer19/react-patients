@@ -10,6 +10,8 @@ import {
   LOAD_RECORDS_ERROR,
   SET_PRACTITIONER_START,
   SET_PRACTITIONER_SUCCESS,
+  SET_CURRENT_PATIENT_START,
+  SET_CURRENT_PATIENT_SUCCESS,
 } from './constants';
 
 export function loadRecords() {
@@ -41,6 +43,20 @@ export function setPractitioner(id) {
 export function setPractitionerSuccess(id) {
   return {
     type: SET_PRACTITIONER_SUCCESS,
+    id,
+  };
+}
+
+export function setPatientId(id) {
+  return {
+    type: SET_CURRENT_PATIENT_START,
+    id,
+  };
+}
+
+export function setPatientIdSuccess(id) {
+  return {
+    type: SET_CURRENT_PATIENT_SUCCESS,
     id,
   };
 }

@@ -14,10 +14,15 @@ import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectPatientsRecordsByPractitioner } from '../App/selectors';
 import globalReducer from '../App/reducer';
 import saga from '../App/saga';
-import { loadRecords } from '../App/actions';
+import { loadRecords, setPatientId } from '../App/actions';
 import Table from '../../components/Table';
 
-export function PatientsPage({ practRecords, history, location }) {
+export function PatientsPage({
+  practRecords,
+  history,
+  location,
+  setPatientId: setCurrentPatientId,
+}) {
   useInjectReducer({ key: 'global', reducer: globalReducer });
   useInjectSaga({ key: 'global', saga });
 
@@ -28,6 +33,13 @@ export function PatientsPage({ practRecords, history, location }) {
     }
   }, [practRecords]);
 
+  function onColBtnClick(id, e) {
+    e.preventDefault();
+    // set to state / select clicked patient
+    setCurrentPatientId(id);
+    history.push(`/patients/${id}`);
+  }
+
   return (
     <div>
       <Table
@@ -37,6 +49,7 @@ export function PatientsPage({ practRecords, history, location }) {
         buttonColumnText="Patient Profile"
         buttonColumnHrefId="patientId"
         path={location.pathname}
+        onColBtnClick={(id, e) => onColBtnClick(id, e)}
       />
     </div>
   );
@@ -46,6 +59,7 @@ PatientsPage.propTypes = {
   practRecords: PropTypes.array,
   history: PropTypes.object,
   location: PropTypes.object,
+  setPatientId: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -54,6 +68,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
   loadRecords: () => dispatch(loadRecords()),
+  setPatientId: id => dispatch(setPatientId(id)),
 });
 
 const withConnect = connect(
