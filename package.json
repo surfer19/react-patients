@@ -90,6 +90,7 @@
     "redux-saga": "1.0.2",
     "reselect": "4.0.0",
     "sanitize.css": "8.0.0",
+    "shortid": "^2.2.15",
     "styled-components": "4.2.0"
   },
   "devDependencies": {
