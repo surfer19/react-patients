@@ -7,6 +7,7 @@
 import React from 'react';
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import Button from '../Button';
 
 function Table({
@@ -51,11 +52,14 @@ const generateHeader = headData =>
 const generateTableColumns = (row, allowedAttrs) =>
   Object.entries(row).map(rowEntries => {
     const colKey = rowEntries[0];
-    const colValue = rowEntries[rowEntries.length - 1];
+    let colValue = rowEntries[rowEntries.length - 1];
     if (typeof colValue === 'string') {
       // iterate only over allowedAttrs
       if (allowedAttrs.find(attr => attr === colKey)) {
-        // TODO: parse date
+        // convert to date if string is valid Date
+        if (moment(colValue).isValid()) {
+          colValue = moment(new Date(colValue)).format('LL');
+        }
         return <td key={shortid.generate()}>{colValue}</td>;
       }
     }
