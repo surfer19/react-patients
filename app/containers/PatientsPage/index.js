@@ -4,42 +4,64 @@
  *
  */
 
-import React from 'react';
-// import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectPatientsPage from './selectors';
-import reducer from './reducer';
-import saga from './saga';
+import { makeSelectPatientsRecordsByPractitioner } from '../App/selectors';
+import globalReducer from '../App/reducer';
+import saga from '../App/saga';
+import { loadRecords } from '../App/actions';
+import Table from '../../components/Table';
 
-export function PatientsPage() {
-  useInjectReducer({ key: 'patientsPage', reducer });
-  useInjectSaga({ key: 'patientsPage', saga });
+export function PatientsPage({ practRecords, history, location }) {
+  useInjectReducer({ key: 'global', reducer: globalReducer });
+  useInjectSaga({ key: 'global', saga });
 
-  return <div />;
+  useEffect(() => {
+    loadRecords();
+    if (practRecords.length === 0) {
+      history.push('/');
+    }
+  }, [practRecords]);
+
+  return (
+    <div>
+      <Table
+        headData={['Name', 'Birthday', 'Diabetes type', '']}
+        rowData={practRecords}
+        allowedAttrs={['fullname', 'dateOfBirth', 'diabetesType']}
+        buttonColumnText="Patient Profile"
+        buttonColumnHrefId="patientId"
+        path={location.pathname}
+      />
+    </div>
+  );
 }
 
-// PatientsPage.propTypes = {
-// dispatch: PropTypes.func,
-// };
+PatientsPage.propTypes = {
+  practRecords: PropTypes.array,
+  history: PropTypes.object,
+  location: PropTypes.object,
+};
 
 const mapStateToProps = createStructuredSelector({
-  patientsPage: makeSelectPatientsPage(),
+  practRecords: makeSelectPatientsRecordsByPractitioner(),
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  loadRecords: () => dispatch(loadRecords()),
+});
 
 const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(PatientsPage);
+export default compose(
+  // memo,
+  withConnect,
+)(PatientsPage);

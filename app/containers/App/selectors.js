@@ -1,11 +1,32 @@
 import { createSelector } from 'reselect';
 
-const selectRouter = state => state.router;
-
-const makeSelectLocation = () =>
+const makeSelectPatientsRecords = () =>
   createSelector(
-    selectRouter,
-    routerState => routerState.location,
+    state => state.global,
+    globalState => globalState.patientsRecords,
   );
 
-export { makeSelectLocation };
+// returns id or null
+const makeSelectPractitionerId = () =>
+  createSelector(
+    state => state.global.patientsRecords,
+    state => state.global.practitionerId,
+    (records, id) => {
+      const foundRecord = records.find(record => record.practitionerId === id);
+      return foundRecord ? foundRecord.practitionerId : null;
+    },
+  );
+
+const makeSelectPatientsRecordsByPractitioner = () =>
+  createSelector(
+    state => state.global.patientsRecords,
+    state => state.global.practitionerId,
+    (statik, practId) =>
+      statik.filter(record => record.practitionerId === practId),
+  );
+
+export {
+  makeSelectPatientsRecords,
+  makeSelectPractitionerId,
+  makeSelectPatientsRecordsByPractitioner,
+};

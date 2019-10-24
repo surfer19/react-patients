@@ -34,7 +34,6 @@ describe('<Button />', () => {
   });
 
   it('Should render and match the snapshot', () => {
-
     expect(renderComponent).toMatchSnapshot();
   });
 });

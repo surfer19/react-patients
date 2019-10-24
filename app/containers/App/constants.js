@@ -8,3 +8,15 @@
  * Follow this format:
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
+/*
+ *
+ * HomePage constants
+ *
+ */
+
+export const LOAD_RECORDS_START = 'app/App/LOAD_RECORDS_START';
+export const LOAD_RECORDS_SUCCESS = 'app/App/LOAD_RECORDS_SUCCESS';
+export const LOAD_RECORDS_ERROR = 'app/App/LOAD_RECORDS_ERROR';
+
+export const SET_PRACTITIONER_START = 'app/App/SET_PRACTITIONER_START';
+export const SET_PRACTITIONER_SUCCESS = 'app/App/SET_PRACTITIONER_SUCCESS';

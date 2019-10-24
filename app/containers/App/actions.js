@@ -8,9 +8,8 @@ import {
   LOAD_RECORDS_START,
   LOAD_RECORDS_SUCCESS,
   LOAD_RECORDS_ERROR,
-  GET_PRACTITIONER_START,
-  GET_PRACTITIONER_SUCCESS,
-  GET_PRACTITIONER_NOT_EXIST,
+  SET_PRACTITIONER_START,
+  SET_PRACTITIONER_SUCCESS,
 } from './constants';
 
 export function loadRecords() {
@@ -33,22 +32,15 @@ export function loadRecordsError(error) {
   };
 }
 
-export function getPractitioner(id) {
+export function setPractitioner(id) {
   return {
-    type: GET_PRACTITIONER_START,
+    type: SET_PRACTITIONER_START,
     id,
   };
 }
-
-export function getPractitionerSuccess(id) {
+export function setPractitionerSuccess(id) {
   return {
-    type: GET_PRACTITIONER_SUCCESS,
+    type: SET_PRACTITIONER_SUCCESS,
     id,
-  };
-}
-
-export function getPractitionerNotExist() {
-  return {
-    type: GET_PRACTITIONER_NOT_EXIST,
   };
 }

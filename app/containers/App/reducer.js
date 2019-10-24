@@ -8,9 +8,8 @@ import {
   LOAD_RECORDS_START,
   LOAD_RECORDS_SUCCESS,
   LOAD_RECORDS_ERROR,
-  GET_PRACTITIONER_START,
-  GET_PRACTITIONER_SUCCESS,
-  GET_PRACTITIONER_NOT_EXIST,
+  SET_PRACTITIONER_START,
+  SET_PRACTITIONER_SUCCESS,
 } from './constants';
 
 export const initialState = {
@@ -19,7 +18,7 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const homePageReducer = (state = initialState, action) =>
+const globalReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case LOAD_RECORDS_START:
@@ -29,15 +28,13 @@ const homePageReducer = (state = initialState, action) =>
         break;
       case LOAD_RECORDS_ERROR:
         break;
-      case GET_PRACTITIONER_START:
-        break;
-      case GET_PRACTITIONER_SUCCESS:
+      case SET_PRACTITIONER_START:
         draft.practitionerId = action.id;
         break;
-      case GET_PRACTITIONER_NOT_EXIST:
-        draft.practitionerId = false;
+      case SET_PRACTITIONER_SUCCESS:
+        draft.practitionerId = action.id;
         break;
     }
   });
 
-export default homePageReducer;
+export default globalReducer;
