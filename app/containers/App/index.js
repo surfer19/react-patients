@@ -13,7 +13,7 @@ import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
 import PatientsPage from 'containers/PatientsPage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import Graph from '../../components/Graph';
+import LineChart from '../../components/LineChart';
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
@@ -22,7 +22,7 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/patients" component={PatientsPage} />
-        <Route path="/patients/:id" component={Graph} />
+        <Route path="/patients/:id" component={LineChart} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

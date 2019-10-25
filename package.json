@@ -66,6 +66,7 @@
   "dependencies": {
     "@babel/polyfill": "7.4.3",
     "chalk": "^2.4.2",
+    "chart.js": "^2.8.0",
     "compression": "1.7.4",
     "connected-react-router": "6.4.0",
     "cross-env": "5.2.0",
@@ -83,6 +84,7 @@
     "moment-timezone": "^0.5.27",
     "prop-types": "15.7.2",
     "react": "^16.10.2",
+    "react-chartjs-2": "^2.8.0",
     "react-dom": "^16.10.2",
     "react-helmet": "6.0.0-beta",
     "react-intl": "2.8.0",
