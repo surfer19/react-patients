@@ -78,7 +78,7 @@ HomePage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  practitionerId: makeSelectPractitionerId(),
+  practitionerId: makeSelectPractitionerId,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -100,8 +100,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(
-  // Put `withReducer` before `withConnect`
-  // withReducer,
-  withConnect,
-)(HomePage);
+export default compose(withConnect)(HomePage);

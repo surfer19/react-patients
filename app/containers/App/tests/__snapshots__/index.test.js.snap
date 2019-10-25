@@ -24,6 +24,18 @@ exports[`<App /> should render and match the snapshot 1`] = `
       path="/patients"
     />
     <Route
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(LineChart)",
+          "type": [Function],
+        }
+      }
+      path="/patients/:id"
+    />
+    <Route
       component={[Function]}
     />
   </Switch>

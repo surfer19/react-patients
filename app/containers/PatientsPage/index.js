@@ -79,8 +79,8 @@ PatientsPage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  practRecords: makeSelectPatientsRecordsByPractitioner(),
-  practitionerId: makeSelectPractitionerId(),
+  practRecords: makeSelectPatientsRecordsByPractitioner,
+  practitionerId: makeSelectPractitionerId,
 });
 
 const mapDispatchToProps = dispatch => ({

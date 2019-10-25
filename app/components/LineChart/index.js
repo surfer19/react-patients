@@ -97,7 +97,7 @@ LineChart.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  patientRecord: makeSelectPatientByPatientId(),
+  patientRecord: makeSelectPatientByPatientId,
 });
 
 export default connect(mapStateToProps)(LineChart);
