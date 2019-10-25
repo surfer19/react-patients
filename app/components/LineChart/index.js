@@ -14,6 +14,7 @@ import { createStructuredSelector } from 'reselect';
 import { makeSelectPatientByPatientId } from '../../containers/App/selectors';
 import { annotations } from './annotations';
 import { datasetConfig } from './datasetConfig';
+import Button from '../Button';
 moment.suppressDeprecationWarnings = true;
 
 function LineChart({ patientRecord }) {
@@ -46,41 +47,48 @@ function LineChart({ patientRecord }) {
     ],
   };
   return (
-    <Line
-      data={data}
-      width={1000}
-      height={500}
-      options={{
-        scales: {
-          xAxes: [
-            {
-              type: 'time',
-              time: {
-                unit: 'hour',
-                stepSize: 3,
-                min: prepareStartAndEnd().start,
-                max: prepareStartAndEnd().end,
-                displayFormats: {
-                  hour: 'HH:mm',
+    <div>
+      <Line
+        data={data}
+        width={1000}
+        height={500}
+        options={{
+          scales: {
+            xAxes: [
+              {
+                type: 'time',
+                time: {
+                  unit: 'hour',
+                  stepSize: 3,
+                  min: prepareStartAndEnd().start,
+                  max: prepareStartAndEnd().end,
+                  displayFormats: {
+                    hour: 'HH:mm',
+                  },
                 },
               },
-            },
-          ],
-          yAxes: [
-            {
-              display: true,
-              ticks: {
-                beginAtZero: true,
-                max: 160,
+            ],
+            yAxes: [
+              {
+                display: true,
+                ticks: {
+                  beginAtZero: true,
+                  max: 160,
+                },
               },
-            },
-          ],
-        },
-        annotation: {
-          annotations,
-        },
-      }}
-    />
+            ],
+          },
+          annotation: {
+            annotations,
+          },
+        }}
+      />
+      <div className="mt-3">
+        <Button href="/patients" colorType="danger" right>
+          Patients list
+        </Button>
+      </div>
+    </div>
   );
 }
 

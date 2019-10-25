@@ -11,14 +11,19 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { makeSelectPatientsRecordsByPractitioner } from '../App/selectors';
+import {
+  makeSelectPatientsRecordsByPractitioner,
+  makeSelectPractitionerId,
+} from '../App/selectors';
 import globalReducer from '../App/reducer';
 import saga from '../App/saga';
 import { loadRecords, setPatientId } from '../App/actions';
 import Table from '../../components/Table';
+import Button from '../../components/Button';
 
 export function PatientsPage({
   practRecords,
+  practitionerId,
   history,
   location,
   setPatientId: setCurrentPatientId,
@@ -42,6 +47,16 @@ export function PatientsPage({
 
   return (
     <div>
+      <div className="row mt-3 mb-3">
+        <div className="col-12">
+          <span>
+            <strong>DoctorID:</strong> {practitionerId}
+          </span>
+          <Button href="/" colorType="danger" right>
+            Logout
+          </Button>
+        </div>
+      </div>
       <Table
         headData={['Name', 'Birthday', 'Diabetes type', '']}
         rowData={practRecords}
@@ -60,10 +75,12 @@ PatientsPage.propTypes = {
   history: PropTypes.object,
   location: PropTypes.object,
   setPatientId: PropTypes.func,
+  practitionerId: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   practRecords: makeSelectPatientsRecordsByPractitioner(),
+  practitionerId: makeSelectPractitionerId(),
 });
 
 const mapDispatchToProps = dispatch => ({
