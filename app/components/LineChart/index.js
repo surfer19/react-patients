@@ -12,6 +12,8 @@ import { Line } from 'react-chartjs-2';
 import 'chartjs-plugin-annotation';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectPatientByPatientId } from '../../containers/App/selectors';
+import { annotations } from './annotations';
+import { datasetConfig } from './datasetConfig';
 moment.suppressDeprecationWarnings = true;
 
 function LineChart({ patientRecord }) {
@@ -24,7 +26,7 @@ function LineChart({ patientRecord }) {
     }));
 
   const prepareStartAndEnd = () => {
-    // get first item
+    // get first record of a day
     const firstItem = glucMesures[0];
     const shiftUtcTime = 'T00:00:00+02:00';
     const firstMom = moment(firstItem.date);
@@ -38,24 +40,7 @@ function LineChart({ patientRecord }) {
   const data = {
     datasets: [
       {
-        label: 'Glucose value',
-        fill: false,
-        lineTension: 0.1,
-        backgroundColor: 'rgba(75,192,192,0.4)',
-        borderColor: 'rgba(75,192,192,1)',
-        borderCapStyle: 'butt',
-        borderDash: [],
-        borderDashOffset: 0.0,
-        borderJoinStyle: 'miter',
-        pointBorderColor: '#2f7f80',
-        pointBackgroundColor: '#2f7f80;',
-        pointBorderWidth: 3,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-        pointHoverBorderColor: 'rgba(220,220,220,1)',
-        pointHoverBorderWidth: 2,
-        pointRadius: 1,
-        pointHitRadius: 10,
+        ...datasetConfig,
         data: prepareChartData(),
       },
     ],
@@ -92,53 +77,7 @@ function LineChart({ patientRecord }) {
           ],
         },
         annotation: {
-          annotations: [
-            {
-              type: 'line',
-              mode: 'horizontal',
-              scaleID: 'y-axis-0',
-              value: 60,
-              borderColor: 'blue',
-              borderWidth: 1,
-              label: {
-                enabled: true,
-                position: 'right',
-                content: 'Low',
-                backgroundColor: 'blue',
-              },
-            },
-            {
-              type: 'box',
-              // ID of the Y scale to bind onto
-              yScaleID: 'y-axis-0',
-              // Top edge of the box in units along the y axis
-              yMax: 105,
-              // Bottom edge of the box
-              yMin: 80,
-              backgroundColor: 'rgba(112,251,20, 0.2)',
-              borderWidth: 0.01,
-              label: {
-                enabled: true,
-                position: 'right',
-                backgroundColor: 'red',
-                content: 'High',
-              },
-            },
-            {
-              type: 'line',
-              mode: 'horizontal',
-              scaleID: 'y-axis-0',
-              value: 150,
-              borderColor: 'red',
-              borderWidth: 2,
-              label: {
-                enabled: true,
-                position: 'right',
-                backgroundColor: 'red',
-                content: 'High',
-              },
-            },
-          ],
+          annotations,
         },
       }}
     />
