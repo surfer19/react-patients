@@ -14,7 +14,7 @@
 ## Future improvements
 - Add more tests
 - Split some chunks of code to separate components
-- Improve reusement of components
+- Improve reusability of components
 - Add navigation after login
 - Library `react-chartjs-2` doesn't have option to add label to Box Annotations (Ideal glucose green box) - nice opportunity to open-source contribution :)
 
