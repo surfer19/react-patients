@@ -11,6 +11,9 @@
 - `react-chartjs-2` (Wrapper around chartjs)
 - `moment` for Date&time parsing
 
+## Test data
+You can use `DoctorID = 2588ac7f57fd9b49` to access application after login screen
+
 ## Future improvements
 - Add more tests
 - Split some chunks of code to separate components
