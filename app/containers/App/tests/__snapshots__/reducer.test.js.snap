@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`globalReducer handles the loadRecords action 1`] = `Object {}`;
+
+exports[`globalReducer handles the loadRecordsError action 1`] = `Object {}`;
+
+exports[`globalReducer handles the loadRecordsSuccess action 1`] = `
+Object {
+  "patientsRecords": Array [
+    Object {
+      "name": "Wilson",
+      "patientId": "5cc17bd0a75e3173228f1684",
+      "practitionerId": "2588ac7f57fd9b49",
+      "surname": "Wade",
+    },
+    Object {
+      "name": "Bridges",
+      "patientId": "5cc17bd0a5283537f6c20a4a",
+      "practitionerId": "a7e46537714eca83",
+      "surname": "Odom",
+    },
+  ],
+}
+`;
+
+exports[`globalReducer handles the setPatientId action 1`] = `
+Object {
+  "patientId": "123456",
+}
+`;
+
+exports[`globalReducer handles the setPatientIdSuccess action 1`] = `
+Object {
+  "patientId": "123456",
+}
+`;
+
+exports[`globalReducer handles the setPractitioner action 1`] = `
+Object {
+  "practitionerId": "123456",
+}
+`;
+
+exports[`globalReducer handles the setPractitionerSuccess action 1`] = `
+Object {
+  "practitionerId": "123456",
+}
+`;
+
+exports[`globalReducer returns the initial state 1`] = `
+Object {
+  "patientId": "",
+  "patientsRecords": Array [],
+  "practitionerId": "",
+}
+`;

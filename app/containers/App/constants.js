@@ -10,7 +10,7 @@
  */
 /*
  *
- * HomePage constants
+ * App constants
  *
  */
 

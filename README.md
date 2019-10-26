@@ -6,7 +6,7 @@
 - `React` & `Redux`
 - `React Function Components` and `Hooks`
 - `redux-saga`
-- snapshots & unit testing with `Jest`
+- snapshots & unit testing with `Jest` (checkout `containers/App/tests` for my demonstration of basic Redux&selectors unit/snapshot tests)
 - most components are wrapped to `Bootstrap` styles or `styled-components`
 - `react-chartjs-2` (Wrapper around chartjs)
 - `moment` for Date&time parsing

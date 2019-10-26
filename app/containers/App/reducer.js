@@ -1,6 +1,6 @@
 /*
  *
- * HomePage reducer
+ * App reducer
  *
  */
 import produce from 'immer';
